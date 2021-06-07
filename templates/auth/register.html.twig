@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% from "additionnal/alert.html.twig" import alert as alert %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    {{ alert("verify_email_error", "danger") }}
+
+    <section class="background-light-grey padding-tb-50px text-center text-lg-left">
+        <div class="container">
+            <div class="row justify-content-md-center">
+
+                <div class="col-lg-4">
+                    <div class="padding-30px background-white border-1 border-grey-1">
+                        {{ form_start(registrationForm) }}
+                            {{ form_row(registrationForm.email, {
+                                'label_attr' : {
+                                    'class' : 'col-form-label'
+                                },
+                                'label' : 'Email',
+                                'attr' : {
+                                    'class' : 'rounded-0'
+                                }
+                            }) }}
+                            {{ form_row(registrationForm.username, {
+                                'label_attr' : {
+                                    'class' : 'col-form-label'
+                                },
+                                'label' : 'Username / Pseudo',
+                                'attr' : {
+                                    'class' : 'rounded-0'
+                                }
+                            }) }}
+                            {{ form_row(registrationForm.plainPassword, {
+                                'label_attr' : {
+                                    'class' : 'col-form-label'
+                                },
+                                'label' : 'Mot de Passe',
+                                'attr' : {
+                                    'class' : 'rounded-0'
+                                }
+                            }) }}
+                            {{ form_row(registrationForm.agreeTerms) }}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block rounded-0">S'inscrire</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="margin-bottom-20px margin-top-20px">
+                        <i class="fa fa-key margin-right-10px" aria-hidden="true"></i> <a href="{{ path('app_login') }}" class="text-uppercase text-black"><strong class="text-uppercase">S'inscrire maintenant</strong></a>
+                        <span class="d-block text-grey-2">En vous inscrivant, vous acceptez nos <a href="#" class="text-grey-2">Conditions d'utilisation</a></span>
+                    </div>
+
+                    <div class="margin-bottom-15px padding-bottom-15px border-bottom-1 border-grey-2">
+                        <i class="fa fa-lock margin-right-10px" aria-hidden="true"></i> <a href="#" class="text-uppercase text-black"><strong>Récupérer mon mot de passe</strong></a>
+                    </div>
+                    <p class="text-grey-2">Mauris fermentum porta sem, non hendrerit enim bibendum consectetur. Fusce diam est, porttitor vehicula gravida faucibus, varius ante sit amet. </p>
+                </div>
+
+            </div>
+            <!-- // row -->
+        </div>
+        <!-- // container -->
+    </section>
+{% endblock %}

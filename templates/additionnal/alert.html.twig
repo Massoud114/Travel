@@ -1,0 +1,7 @@
+{% macro alert(type, color) %}
+	{% for flashError in app.flashes(type) %}
+		<div class="alert alert-{{ color }}" role="alert">
+			{{ flashError }}
+		</div>
+	{% endfor %}
+{% endmacro %}

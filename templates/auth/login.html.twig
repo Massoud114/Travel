@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion!{% endblock %}
+
+{% block header %}
+    <header class="background-white box-shadow">
+        <div class="background-main-color padding-tb-5px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm d-none d-sm-block">
+                        <ul class="user-area list-inline float-right margin-0px text-white">
+                            {% if app.user %}
+                                <li class="list-inline-item padding-right-10px">{{ app.user.username }}</li>
+                                <li class="list-inline-item"><a href="{{ path('app_logout') }}"><i class="fa fa-user-plus padding-right-5px"></i>Déconnexion</a></li>
+                            {% else %}
+                                <li class="list-inline-item padding-right-10px"><a href="{{ path('app_login') }}"><i class="fa fa-lock padding-right-5px"></i>Connexion</a></li>
+                                <li class="list-inline-item"><a href="{{ path('app_register') }}"><i class="fa fa-user-plus padding-right-5px"></i>S'inscrire</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        </div>
+    {% endif %}
+
+    <section class="background-light-grey padding-tb-80px">
+        <div class="container">
+            <div class="row justify-content-md-center">
+
+                <div class="col-lg-4">
+
+                    <div class="text-center margin-bottom-30px">
+                        <a href="#"><img src="images/logo.png" alt=""></a>
+                    </div>
+
+                    <div class="padding-30px background-white border-1 border-grey-1">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="inputUsername" class="col-form-label"><strong>Email / Nom d'utilisateur</strong></label>
+                                <input type="text" value="{{ last_username }}" name="username" autocomplete="username" required autofocus class="form-control rounded-0" id="inputUsername">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-form-label"><strong>Mot de Passe</strong></label>
+                                <input type="password" class="form-control rounded-0" name="password" id="inputPassword" autocomplete="current-password" required>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <div class="form-group ">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" name="_remember_me" type="checkbox"> Se souvenir de moi
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block rounded-0 background-main-color">S'identifier</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- // row -->
+        </div>
+        <!-- // container -->
+    </section>
+{% endblock %}
