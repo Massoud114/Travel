@@ -7,13 +7,16 @@ let flights = null
 travelForm.addEventListener('submit', (async e => {
 	e.preventDefault()
 	const suggestInputs = document.getElementsByClassName('suggest-input');
+	console.log(suggestInputs);
 	let travelData = {
 		originLocationCode: document.getElementById('originCode').value,
 		destinationLocationCode: document.getElementById('destinationCode').value,
 		departureDate: document.getElementById('travel-date').value,
 		adults: document.getElementById('travel-adult').value,
 		originCountry : suggestInputs[0].getAttribute("data-country"),
-		destinationCountry : suggestInputs[1].getAttribute("data-country")
+		destinationCountry : suggestInputs[1].getAttribute("data-country"),
+		originAirport : suggestInputs[0].value,
+		destinationAirport : suggestInputs[1].value
 	}
 
 	let url = "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + travelData.originLocationCode + "&destinationLocationCode=" + travelData.destinationLocationCode + "&departureDate=" + travelData.departureDate.toLocaleString() + "&adults=" + travelData.adults
