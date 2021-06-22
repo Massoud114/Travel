@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="padding-tb-40px background-light-grey">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-8 sticky-content">
+
+					<div class="background-white border border-grey-1">
+						<ul class="slider-1 margin-0px padding-0px list-unstyled">
+							<li><img src="{{ image }}" alt=""></li>
+						</ul>
+					</div>
+					<!-- // slider -->
+
+					<div class="background-white border border-grey-1 padding-30px margin-tb-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 border-bottom-1 border-second-color  padding-bottom-8px">Description</h3>
+						<div class="padding-top-10px">
+							<p>{{ hotel.description.text }}</p>
+						</div>
+					</div>
+					<!-- // Description -->
+
+					<div class="background-white border border-grey-1 padding-30px margin-tb-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 border-bottom-1 border-second-color padding-bottom-8px">
+							Map Location</h3>
+						<div id="map" class="padding-top-10px">
+						</div>
+					</div>
+					<!-- // Map Location -->
+				</div>
+				<!-- // col-lg-9 -->
+				<div class="col-lg-4 sticky-sidebar">
+
+					<!-- detailed -->
+					<div class="background-white border border-grey-1 padding-30px margin-bottom-30px">
+						<h5 class="font-weight-700">{{ hotel.name }}</h5>
+						<small class="text-uppercase text-extra-small">
+							<a href="#" class="text-grey-4"><i class="fa fa-map-marker margin-right-5px"></i>
+								<span class="text-third-color margin-right-5px">{% for line in hotel.address.lines %}{{ line }}, {% endfor %}</span> {{ hotel.address.cityName }}</a>
+						</small>
+						<div class="alert alert-success margin-tb-15px border-radius-0" role="alert">
+							{{ isAvailable ? "Disponible" : "Indisponible" }}
+						</div>
+						<i class="d-block padding-tb-8px text-grey-2 ">{{ hotel.description.text }}</i>
+						<div class="margin-bottom-8px text-uppercase text-extra-small">
+							<strong class="text-medium text-third-color padding-right-5px font-weight-bold">{{ offer.price.total }} {{ offer.price.currency|currency_symbol }}</strong>
+						</div>
+						<a href="{{ path('hotel.pay') }}" class="btn-sm btn-lg btn-block background-main-color text-white text-center font-weight-bold text-uppercase">Réserver maintenant </a>
+					</div>
+					<!-- // detailed -->
+
+					<!-- Amenities  -->
+					<div class="background-white border border-grey-1 padding-30px margin-bottom-30px">
+						<ul class="row padding-0px margin-0px list-unstyled no-gutters">
+
+							{% if "TELEVISION" in hotel.amenities %}
+								<li class="col-lg-6 margin-bottom-20px">
+									<i class="fa fa-television text-second-color text-extra-large margin-right-10px"></i> <span>TV Plasma</span>
+								</li>
+							{% endif %}
+							{% if "WIFI" in hotel.amenities or "WIRELESS_CONNECTIVITY" in hotel.amenities or "INTERNET_SERVICES" in hotel.amenities%}
+								<li class="col-lg-6 margin-bottom-20px">
+									<i class="fa fa-wifi text-second-color text-extra-large margin-right-10px"></i> <span>Wifi Gratuit</span>
+								</li>
+							{% endif %}
+							{% if "COFFEE_SHOP" in hotel.amenities%}
+								<li class="col-lg-6 margin-bottom-20px">
+									<i class="fa fa-television text-second-color text-extra-large margin-right-10px"></i> <span>Déjeuner</span>
+								</li>
+							{% endif %}
+							{% if "DRIVING_RANGE" in hotel.amenities%}
+								<li class="col-lg-6">
+									<i class="fa fa-automobile text-second-color text-extra-large margin-right-10px"></i> <span>Parking</span>
+								</li>
+							{% endif %}
+						</ul>
+					</div>
+					<!-- Amenities  -->
+
+					<!-- Need help ? -->
+					<div class="background-second-color border border-grey-1 padding-30px margin-bottom-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 padding-bottom-8px">BESOIN D'AIDE?</h3>
+						<div class="text-uppercase text-extra-large text-white font-weight-700 padding-bottom-8px">{{ hotel.contact.phone    }}</div>
+						<div class="text-uppercase text-medium">{{ hotel.contact.email }}</div>
+					</div>
+					<!-- // Need help  -->
+
+
+				</div>
+				<!-- // col-lg-3 -->
+			</div>
+			<!-- // row -->
+
+		</div>
+		<!-- // container -->
+	</div>
+{% endblock %}
+
+

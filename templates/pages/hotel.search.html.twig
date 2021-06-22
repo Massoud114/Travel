@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="padding-tb-40px background-light-grey">
+		<div class="container">
+
+			<div class="row">
+				<!-- Sidebar -->
+				<div class="col-lg-3 sticky-sidebar">
+
+					<!-- Price Search -->
+					<div class="widget">
+						<h4 class="widget-title clearfix"><span>Price</span></h4>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+								$0 - $50
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								$50 - $100
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								$100 - $500
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								$500 - $1000
+							</label>
+						</div>
+						<div class="form-check disabled">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+								$1000 - $10,000
+							</label>
+						</div>
+						<a href="#" class="btn-sm btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600"><i class="fa fa-search"></i> Refresh  Search</a>
+					</div>
+					<!-- Price Search -->
+
+					<!-- Price Search -->
+					<div class="widget">
+						<h4 class="widget-title clearfix"><span>Facility</span></h4>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">Accessibiliy
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Breakfast
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Fitness center
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Free Wifi
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Parking
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Pet allowed
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Plasma TV
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Pool
+							</label>
+						</div>
+						<a href="#" class="btn-sm btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600"><i class="fa fa-search"></i> Refresh  Search</a>
+					</div>
+				</div>
+				<!-- //  Sidebar -->
+
+				<!-- Content -->
+				<div class="col-lg-9">
+					<!-- hotel post -->
+					{% for hotel in hotels %}
+						<div class="background-white border-bottom-1 border-grey-1 with-hover box-shadow-hover margin-bottom-40px">
+							<div class="row no-gutters">
+								<div class="col-lg-4">
+									<div class="hotel-img position-relative">
+										<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="">
+										<div class="hover-option background-main-color opacity-6">
+											<h3 class="text-center text-white padding-top-n-25 "><i class="fa fa-building-o opacity-10"></i></h3>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-8">
+									<div class="padding-30px">
+										<h3 class="text-uppercase text-medium font-weight-600"><a href="#" class="text-dark">{{ hotel.hotel.name }}</a></h3>
+										<small class="text-uppercase text-extra-small">
+											<a href="#" class="text-grey-4"><i class="fa fa-map-marker margin-right-5px"></i>
+												<span class="text-third-color margin-right-5px">
+												{% for line in hotel.hotel.address.lines %}{{ line }}{% endfor %}</span>{{ hotel.hotel.address.cityName }}</a>
+										</small>
+										<div class="claerfix"></div>
+										<a href="{{ path('hotel.show', { id : hotel.hotel.hotelId}) }}" class="float-lg-right btn-sm btn-lg background-second-color text-white text-center font-weight-bold text-uppercase margin-top-0px">Réserver Maintenant </a>
+
+										<i class="d-block padding-tb-8px text-grey-2 ">{{ hotel.available ? 'Disponible' : "Indisponible"}}</i>
+										<div class="margin-bottom-8px text-uppercase text-extra-small">
+											<strong class="text-medium text-third-color padding-right-5px font-weight-bold">{{ hotel.offers[0].price.total }} {{ hotel.offers[0].price.currency|currency_symbol }}</strong>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<!-- // Content -->
+			</div>
+			<!-- //  row -->
+
+		</div>
+		<!-- //  container -->
+	</div>
+{% endblock %}

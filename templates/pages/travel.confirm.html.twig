@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="padding-tb-40px background-light-grey">
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-lg-8">
+					<!-- form -->
+					<div class="background-white border border-grey-1 padding-30px margin-tb-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 border-bottom-1 border-second-color  padding-bottom-8px"><i class="fa fa-check-circle-o text-lime" aria-hidden="true"></i> Réservation terminé</h3>
+
+						<ul class="margin-0px padding-0px list-unstyled">
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Nom de vol</strong>{{ travelData.departureDate }} </li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Flight id</strong>#14596</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">{{ app.user.firstname }}</strong>#14596</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">{{ app.user.lastname }}</strong>#14596</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Your address</strong></li>
+						</ul>
+						<div class="margin-top-15px">
+							<a href="{{ path('travel.change') }}" class="btn-sm btn-lg text-dark text-center font-weight-bold text-uppercase rounded-0 padding-tb-10px padding-lr-30px background-grey-1 margin-right-20px">Retour à l'acceuil</a>
+							<a href="#" class="btn-sm btn-lg  background-main-color text-white text-center font-weight-bold rounded-0 padding-tb-10px padding-lr-30px">Recevoir votre billet</a>
+							<a href="{{ path('hotel.search') }}" class="btn-sm  background-main-color text-white text-center font-weight-bold rounded-0 padding-tb-10px padding-lr-20px">Voir les hôtels</a>
+						</div>
+					</div>
+					<!-- form -->
+
+					<div class="background-second-color border border-grey-1 padding-30px margin-tb-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 padding-bottom-8px">BESOIN D'AIDE?</h3>
+						<div class="text-uppercase text-extra-large text-white font-weight-700 padding-bottom-8px">+222 370 447 17</div>
+						<div class="text-uppercase text-medium">Sunday to Friday 9.00am - 7.30pm</div>
+					</div>
+				</div>
+				<!-- // col-lg-8 -->
+
+			</div>
+			<!-- // row -->
+		</div>
+		<!-- // container -->
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+

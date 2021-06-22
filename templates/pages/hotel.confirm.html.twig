@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="padding-tb-40px background-light-grey">
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<div class="col-lg-8">
+					<!-- form -->
+					<div class="background-white border border-grey-1 padding-30px margin-tb-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 border-bottom-1 border-second-color  padding-bottom-8px"><i class="fa fa-check-circle-o text-lime" aria-hidden="true"></i> Booking is complete</h3>
+
+						<ul class="margin-0px padding-0px list-unstyled">
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Nom de l'Hotel</strong>{{ hotel.name }}</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Hotel id</strong>{{ hotel.hotelId }}</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Votre nom</strong>{{ app.user.firstname }}</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Votre email</strong>{{ app.user.email }}</li>
+							<li class="padding-tb-8px border-bottom-1 border-grey-1"><strong class="margin-right-30px">Address</strong>#14596</li>
+							<li class="padding-tb-8px"><strong class="margin-right-30px">Description</strong>
+								<i class="d-block padding-tb-8px text-grey-2 ">{{ hotel.description.text }}
+								</i>
+							</li>
+						</ul>
+						<div class="margin-top-15px">
+							<a href="{{ path('travel.change') }}" class="btn-sm btn-lg text-dark text-center font-weight-bold text-uppercase rounded-0 padding-tb-10px padding-lr-30px background-grey-1 margin-right-20px">Retour à l'acceuil</a>
+						</div>
+					</div>
+					<!-- form -->
+
+					<div class="background-second-color border border-grey-1 padding-30px margin-tb-30px">
+						<h3 class="text-uppercase text-medium font-weight-700 padding-bottom-8px">NEED HELP?</h3>
+						<div class="text-uppercase text-extra-large text-white font-weight-700 padding-bottom-8px">+222 370 447 17</div>
+						<div class="text-uppercase text-medium">Sunday to Friday 9.00am - 7.30pm</div>
+					</div>
+				</div>
+				<!-- // col-lg-8 -->
+
+			</div>
+			<!-- // row -->
+		</div>
+		<!-- // container -->
+	</div>
+{% endblock %}

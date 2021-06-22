@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Api\Unsplash;
-use App\Entity\User;
+use App\Api\Amadeus;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,17 +32,17 @@ class TravelController extends AbstractController
 	/**
 	 * @Route("/show", name="travel.show", methods={"GET", "POST"})
 	 * @param Request $request
-	 * @param Unsplash $unsplash
+	 * @param Amadeus $amadeus
 	 * @return Response
 	 */
-	public function show(Request $request, Unsplash $unsplash): Response
+	public function show(Request $request, Amadeus $amadeus): Response
 	{
 		$flight = json_decode($request->get('flight'));
 
 		$travelData = json_decode($request->get('travel'));
-		$image = $unsplash->getCountryPhoto($travelData->destinationCountry);
+		$image = $amadeus->getCountryPhoto($travelData->destinationCountry);
 
-		$countryInfo = $unsplash->getCountryInfo($travelData->destinationCountry);
+		$countryInfo = $amadeus->getCountryInfo($travelData->destinationCountry);
 		//dd($travelData, $flight, $countryInfo);
 
 		$session = $request->getSession();
@@ -79,27 +78,28 @@ class TravelController extends AbstractController
 	}
 
 	/**
-	 * @Route("/change", name="travel.change")
+	 * @Route("/pay", name="travel.pay")
 	 * @param Session $session
 	 * @return Response
+	 * @IsGranted("IS_AUTHENTICATED_FULLY")
 	 */
-	public function change(Session $session): Response
+	public function pay(Session $session): Response
 	{
-		if ($session->has('flight')){
-			$session->remove('flight');
-			$session->remove('travel');
+		if (!$session->has('flight')) {
+			return $this->redirectToRoute('travel.new');
 		}
-	    return $this->redirectToRoute("travel.new");
+	    return $this->render('pages/travel.pay.html.twig');
 	}
 
 	/**
 	 * @Route("/confirm", name="travel.confirm")
 	 * @param Session $session
+	 * @param Amadeus $amadeus
 	 * @return Response
+	 * @IsGranted("IS_AUTHENTICATED_FULLY")
 	 */
-	public function confirm(Session $session, Unsplash $unsplash): Response
+	public function confirm(Session $session, Amadeus $amadeus): Response
 	{
-		dd($unsplash->setup());
 		if (!$session->has('flight')) {
 			return $this->redirectToRoute('travel.new');
 		}
@@ -107,7 +107,7 @@ class TravelController extends AbstractController
 		$travelData = $session->get('travel');
 
 		$user = $this->getUser();
-
+		/* On simule le paiement
 		$bookingData = array (
 			'data' =>
 				array (
@@ -165,7 +165,24 @@ class TravelController extends AbstractController
 				),
 		);
 
-		dd($bookingData);
-	    return $this->render('pages/travel.confirm.html.twig');
+		$unsplash->bookFlight($bookingData);*/
+	    return $this->render('pages/travel.confirm.html.twig', [
+	    	'flight' => $flight,
+		    'travelData' => $travelData
+	    ]);
+	}
+
+	/**
+	 * @Route("/change", name="travel.change")
+	 * @param Session $session
+	 * @return Response
+	 */
+	public function change(Session $session): Response
+	{
+		if ($session->has('flight')){
+			$session->remove('flight');
+			$session->remove('travel');
+		}
+		return $this->redirectToRoute("travel.new");
 	}
 }
