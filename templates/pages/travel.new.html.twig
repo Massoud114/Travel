@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('home') }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-7">
+				<div id="search-filter-in" class="full-width sm-position-relative mt-5">
+					<div class="search-filter row no-gutters box-shadow sm-tb-40px">
+						<div class="filter-tabs col-lg-3 background-second-color">
+							<img class="hidden-xs" src="http://placehold.it/200x130" alt=""/>
+							<ul class="nav nav-tabs flex-column" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" data-toggle="tab" href="#home" role="tab"><i class="fa fa-hotel"></i> Flights</a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="filter-output booking-form-box col-lg-8">
+							<div class="tab-content padding-30px background-white">
+								<form class="tab-pane active" id="travel-form">
+									<div class="form-group mb-4">
+										<label>Lieu de Depart:</label>
+										<div class="search-input searchbox" id="">
+											<input type="text" placeholder="Tapez pour rechercher.." class="suggest-input">
+											<input type="hidden" value="" class="iata"  id="originCode">
+											<div class="autocom-box">
+												<!-- here list are inserted from javascript -->
+											</div>
+											<div class="icon"><i class="fas fa-times"></i></div>
+										</div>
+									</div>
+									<div class="form-group mb-4">
+										<label>Destination:</label>
+										<div class="search-input searchbox" id="">
+											<input type="text" placeholder="Tapez pour rechercher.." class="suggest-input">
+											<input type="hidden" value="" class="iata" id="destinationCode">
+											<div class="autocom-box">
+												<!-- here list are inserted from javascript -->
+											</div>
+											<div class="icon"><i class="fas fa-times"></i></div>
+										</div>
+									</div>
+									<div class="form-group mb-4">
+										<label>Date de Depart:</label>
+										<div class="date-input">
+											<input autocomplete="off" type="text" class="input-text datepicker full-width" id="travel-date"/>
+										</div>
+									</div>
+									<div class="form-group mb-2">
+										<label>Nombres de voyageurs:</label>
+										<div>
+											<input type="number" value="1" class="input-text" id="travel-adult"/>
+										</div>
+									</div>
+									<button type="submit" class="btn-sm btn btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600">
+										<i class="fa fa-search"></i> Recherche de vols
+									</button>
+								</form>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	<!-- Page title --->
+	<section id="result-title" class="custom-hidden mt-4 padding-tb-25px text-grey-4">
+		<div class="container">
+			<h6 class="font-weight-300 text-capitalize float-md-left font-2 padding-tb-10px">Résultats de recheche</h6>
+			<div class="clearfix"></div>
+		</div>
+	</section>
+	<!-- // Page title --->
+	<div id="result-container" class="custom-hidden padding-tb-40px background-light-grey">
+		<div class="container">
+
+			<div class="row">
+
+				<!-- Sidebar -->
+				<div class="col-lg-3 sticky-sidebar">
+					<!-- Price Search -->
+					<div class="widget">
+						<h4 class="widget-title clearfix"><span>Price</span></h4>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+								$0 - $50
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								$50 - $100
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								$100 - $500
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								$500 - $1000
+							</label>
+						</div>
+						<div class="form-check disabled">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+								$1000 - $10,000
+							</label>
+						</div>
+						<a href="#" class="btn-sm btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600"><i class="fa fa-search"></i> Refresh  Search</a>
+					</div>
+					<!-- Price Search -->
+
+					<!-- Price Search -->
+					<div class="widget">
+						<h4 class="widget-title clearfix"><span>Flight Type</span></h4>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+								$0 - $50
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								Business
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								First class
+							</label>
+						</div>
+						<div class="form-check border-bottom-1 border-grey-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+								Economy
+							</label>
+						</div>
+						<a href="#" class="btn-sm btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600"><i class="fa fa-search"></i> Refresh  Search</a>
+					</div>
+					<!-- Price Search -->
+
+				</div>
+				<!-- //  Sidebar -->
+
+				<!-- Content -->
+				 <div class="col-lg-9">
+					<div class="row" id="flights-list">
+						<!-- // flight post -->
+
+
+						{#<ul class="pagination pagination-md ">
+							<li class="page-item disabled"><a class="page-link rounded-0" href="#" tabindex="-1">Previous</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link rounded-0" href="#">Next</a></li>
+						</ul>#}
+					</div>
+					<!-- //  Content -->
+				</div>
+			</div>
+			<!--// row -->
+
+		</div>
+	</div>
+{% endblock %}

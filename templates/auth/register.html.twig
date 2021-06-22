@@ -23,15 +23,34 @@
                                     'class' : 'rounded-0'
                                 }
                             }) }}
-                            {{ form_row(registrationForm.username, {
+                            {{ form_row(registrationForm.lastname, {
                                 'label_attr' : {
                                     'class' : 'col-form-label'
                                 },
-                                'label' : 'Username / Pseudo',
+                                'label' : 'Nom',
                                 'attr' : {
                                     'class' : 'rounded-0'
                                 }
                             }) }}
+                            {{ form_row(registrationForm.firstname, {
+                                'label_attr' : {
+                                    'class' : 'col-form-label'
+                                },
+                                'label' : 'Prénom',
+                                'attr' : {
+                                    'class' : 'rounded-0'
+                                }
+                            }) }}
+                            {{ form_row(registrationForm.dateBirth, {
+                                'label_attr' : {
+                                    'class' : 'col-form-label'
+                                },
+                                'label' : 'Date de naissance',
+                                'attr' : {
+                                    'class' : 'rounded-0'
+                                }
+                            }) }}
+
                             {{ form_row(registrationForm.plainPassword, {
                                 'label_attr' : {
                                     'class' : 'col-form-label'

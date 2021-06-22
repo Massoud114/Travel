@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -39,24 +41,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $username;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private DateTime $registerAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ReservationVol::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $reservations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ReservationHotel::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $reservationHotels;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateBirth;
+
     public function __construct()
     {
     	$this->registerAt = new DateTime('now');
+        $this->reservations = new ArrayCollection();
+        $this->reservationHotels = new ArrayCollection();
     }
 
 	public function getId(): ?int
-    {
-        return $this->id;
-    }
+                                                                   {
+                                                                       return $this->id;
+                                                                   }
 
     public function getEmail(): ?string
     {
@@ -135,16 +159,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 	public function getUsername(): string
-         	{
-               		return (string)$this->username;
-               	}
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
+	{
+        return ucfirst($this->firstname);
+	}
 
     public function getRegisterAt(): ?\DateTimeInterface
     {
@@ -154,6 +171,102 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRegisterAt(\DateTimeInterface $registerAt): self
     {
         $this->registerAt = $registerAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReservationVol[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(ReservationVol $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(ReservationVol $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUser() === $this) {
+                $reservation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReservationHotel[]
+     */
+    public function getReservationHotels(): Collection
+    {
+        return $this->reservationHotels;
+    }
+
+    public function addReservationHotel(ReservationHotel $reservationHotel): self
+    {
+        if (!$this->reservationHotels->contains($reservationHotel)) {
+            $this->reservationHotels[] = $reservationHotel;
+            $reservationHotel->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationHotel(ReservationHotel $reservationHotel): self
+    {
+        if ($this->reservationHotels->removeElement($reservationHotel)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationHotel->getUser() === $this) {
+                $reservationHotel->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getDateBirth(): ?\DateTimeInterface
+    {
+        return $this->dateBirth;
+    }
+
+    public function setDateBirth(\DateTimeInterface $dateBirth): self
+    {
+        $this->dateBirth = $dateBirth;
 
         return $this;
     }

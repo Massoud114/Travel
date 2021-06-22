@@ -1,7 +1,9 @@
 jQuery(document).ready(function ($) {
 
 
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
 
     /* Menu Mobile */
     var $menu_show = $('.mobile-toggle'),
