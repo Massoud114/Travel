@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Api\Amadeus;
+use App\Entity\ReservationHotel;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,13 +25,13 @@ class HotelController extends AbstractController
 	 */
 	public function search(Session $session, Amadeus $amadeus): Response
 	{
-		if (!$session->has('flight')) {
+		if (!$session->has('travel')) {
 			return $this->redirectToRoute('travel.new');
 		}
 		$travelData = $session->get('travel');
-		$flight = $session->get('flight');
-		$hotels = $amadeus->getAvailableHotel($travelData, $flight);
+		$hotels = $amadeus->getAvailableHotel($travelData);
 
+		dd($hotels);
 
 	    return $this->render('pages/hotel.search.html.twig', [
 	    	'hotels' => $hotels
@@ -79,7 +80,20 @@ class HotelController extends AbstractController
 	 */
 	public function confirm(Session $session): Response
 	{
+		$manager = $this->getDoctrine()->getManager();
+
 	    $hotel = $session->get('hotel');
+
+		$reservation = new ReservationHotel();
+
+		$reservation->setUser($this->getUser())
+			->setIsValid(true)
+			->setIsPurchased(true)
+			->setHotelName($hotel['hotel']['name']);
+
+		$manager->persist($reservation);
+		$manager->flush();
+
 	    return $this->render('pages/hotel.confirm.html.twig', [
 	    	'hotel' => $hotel
 	    ]);

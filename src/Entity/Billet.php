@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BilletRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,16 +35,21 @@ class Billet
     private $expireAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $file;
+    private ?string $file;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private ?\DateTimeInterface $createdAt;
 
-    public function getId(): ?int
+    public function __construct()
+    {
+    	$this->createdAt = new DateTime();
+    }
+
+	public function getId(): ?int
     {
         return $this->id;
     }

@@ -18,42 +18,29 @@ class ReservationHotel
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=OffreHotel::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $offreHotel;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservationHotels")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private ?User $user;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isValid;
+    private ?bool $isValid;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPurchased;
+    private ?bool $isPurchased;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private string $hotelName;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getOffreHotel(): ?OffreHotel
-    {
-        return $this->offreHotel;
-    }
-
-    public function setOffreHotel(?OffreHotel $offreHotel): self
-    {
-        $this->offreHotel = $offreHotel;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -91,4 +78,22 @@ class ReservationHotel
 
         return $this;
     }
+
+	/**
+	 * @return string
+	 */
+	public function getHotelName(): string
+	{
+		return $this->hotelName;
+	}
+
+	/**
+	 * @param string $hotelName
+	 * @return ReservationHotel
+	 */
+	public function setHotelName(string $hotelName): ReservationHotel
+	{
+		$this->hotelName = $hotelName;
+		return $this;
+	}
 }

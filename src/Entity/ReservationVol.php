@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReservationVolRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,12 +18,6 @@ class ReservationVol
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=OffreVol::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private OffreVol $offre;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
@@ -39,9 +35,19 @@ class ReservationVol
     private bool $isPurchased;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $documentType;
+    private string $origin;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $destination;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $departureDate;
 
     /**
      * @ORM\OneToOne(targetEntity=Billet::class, mappedBy="vol", cascade={"persist", "remove"})
@@ -53,24 +59,12 @@ class ReservationVol
         return $this->id;
     }
 
-    public function getOffre(): ?OffreVol
-    {
-        return $this->offre;
-    }
-
-    public function setOffre(?OffreVol $offre): self
-    {
-        $this->offre = $offre;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
@@ -101,18 +95,6 @@ class ReservationVol
         return $this;
     }
 
-    public function getDocumentType(): ?string
-    {
-        return $this->documentType;
-    }
-
-    public function setDocumentType(?string $documentType): self
-    {
-        $this->documentType = $documentType;
-
-        return $this;
-    }
-
     public function getBillet(): ?Billet
     {
         return $this->billet;
@@ -129,4 +111,60 @@ class ReservationVol
 
         return $this;
     }
+
+	/**
+	 * @return string
+	 */
+	public function getOrigin(): string
+	{
+		return $this->origin;
+	}
+
+	/**
+	 * @param string $origin
+	 * @return ReservationVol
+	 */
+	public function setOrigin(string $origin): ReservationVol
+	{
+		$this->origin = $origin;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDestination(): string
+	{
+		return $this->destination;
+	}
+
+	/**
+	 * @param string $destination
+	 * @return ReservationVol
+	 */
+	public function setDestination(string $destination): ReservationVol
+	{
+		$this->destination = $destination;
+		return $this;
+	}
+
+	/**
+	 * @return String
+	 */
+	public function getDepartureDate(): String
+	{
+		return $this->departureDate;
+	}
+
+	/**
+	 * @param string $departureDate
+	 * @return ReservationVol
+	 */
+	public function setDepartureDate(String $departureDate): ReservationVol
+	{
+		$this->departureDate = $departureDate;
+		return $this;
+	}
+
+
 }

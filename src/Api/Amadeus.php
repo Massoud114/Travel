@@ -81,7 +81,7 @@ class Amadeus
 		dd($response);
 	}*/
 
-	public function getAvailableHotel($travelData, $flight)
+	public function getAvailableHotel($travelData)
 	{
 		$access_token = $this->setup();
 		$response = $this->client->request("GET", "https://test.api.amadeus.com/v2/shopping/hotel-offers", [

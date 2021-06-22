@@ -7,7 +7,6 @@ let flights = null
 travelForm.addEventListener('submit', (async e => {
 	e.preventDefault()
 	const suggestInputs = document.getElementsByClassName('suggest-input');
-	console.log(suggestInputs);
 	let travelData = {
 		originLocationCode: document.getElementById('originCode').value,
 		destinationLocationCode: document.getElementById('destinationCode').value,

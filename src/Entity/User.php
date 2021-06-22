@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -58,17 +59,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
+    private ?string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
+    private ?string $lastname;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $dateBirth;
+    private ?DateTimeInterface $dateBirth;
 
     public function __construct()
     {
@@ -78,9 +79,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 	public function getId(): ?int
-                                                                   {
-                                                                       return $this->id;
-                                                                   }
+	{
+        return $this->id;
+	}
 
     public function getEmail(): ?string
     {
@@ -163,12 +164,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return ucfirst($this->firstname);
 	}
 
-    public function getRegisterAt(): ?\DateTimeInterface
+    public function getRegisterAt(): ?DateTimeInterface
     {
         return $this->registerAt;
     }
 
-    public function setRegisterAt(\DateTimeInterface $registerAt): self
+    public function setRegisterAt(DateTimeInterface $registerAt): self
     {
         $this->registerAt = $registerAt;
 
@@ -259,12 +260,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateBirth(): ?\DateTimeInterface
+    public function getDateBirth(): ?DateTimeInterface
     {
         return $this->dateBirth;
     }
 
-    public function setDateBirth(\DateTimeInterface $dateBirth): self
+    public function setDateBirth(DateTimeInterface $dateBirth): self
     {
         $this->dateBirth = $dateBirth;
 

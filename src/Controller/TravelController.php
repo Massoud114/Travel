@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Api\Amadeus;
+use App\Entity\Billet;
+use App\Entity\ReservationVol;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -166,6 +168,30 @@ class TravelController extends AbstractController
 		);
 
 		$unsplash->bookFlight($bookingData);*/
+
+		// On enregistre en base de données
+		$reservation = new ReservationVol();
+		$reservation->setUser($user)
+			->setIsPurchased(true)
+			->setIsValid(true)
+			->setDepartureDate($travelData->departureDate)
+			->setOrigin($travelData->originAirport)
+			->setDestination($travelData->destinationAirport)
+		;
+		$billet = new Billet();
+		$billet->setIsValid(true)
+			->setExpireAt(new \DateTime('now'));
+
+		$manager = $this->getDoctrine()->getManager();
+		$manager->persist($billet);
+
+		$reservation->setBillet($billet);
+
+		$manager->persist($reservation);
+		$manager->flush();
+
+		$session->remove('flight');
+
 	    return $this->render('pages/travel.confirm.html.twig', [
 	    	'flight' => $flight,
 		    'travelData' => $travelData
