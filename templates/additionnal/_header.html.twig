@@ -5,7 +5,7 @@
 				<div class="col-sm d-none d-sm-block">
 					<ul class="user-area list-inline float-right margin-0px text-white">
 						{% if app.user %}
-							<li class="list-inline-item padding-right-10px">{{ app.user.username }}</li>
+							<li class="list-inline-item padding-right-10px"><a href="{{ path('profile') }}">{{ app.user.username }}</a></li>
 							<li class="list-inline-item"><a href="{{ path('app_logout') }}"><i class="fa fa-user-plus padding-right-5px"></i>Déconnexion</a></li>
 						{% else %}
 							<li class="list-inline-item padding-right-10px"><a href="{{ path('app_login') }}"><i class="fa fa-lock padding-right-5px"></i>Connexion</a></li>

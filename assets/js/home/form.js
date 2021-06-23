@@ -4,6 +4,8 @@ const travelForm = document.getElementById('travel-form')
 
 let flights = null
 
+let loader = document.getElementById('loading')
+
 travelForm.addEventListener('submit', (async e => {
 	e.preventDefault()
 	const suggestInputs = document.getElementsByClassName('suggest-input');
@@ -17,11 +19,12 @@ travelForm.addEventListener('submit', (async e => {
 		originAirport : suggestInputs[0].value,
 		destinationAirport : suggestInputs[1].value
 	}
-
+	loader.classList.remove("loading-hidden")
 	let url = "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + travelData.originLocationCode + "&destinationLocationCode=" + travelData.destinationLocationCode + "&departureDate=" + travelData.departureDate.toLocaleString() + "&adults=" + travelData.adults
 	flights = await axios.get(url)
 		.then(r => r.data.data)
 		.then(data => {
+			loader.classList.add("loading-hidden")
 			showFlightList(data, travelData)
 			return data
 		})
@@ -59,7 +62,7 @@ function showFlightList(flights, travelData) {
 						<form action="/travel/show" method="post">
 							<input name="travel" type="hidden" value='${JSON.stringify(travelData)}'>
 							<input name="flight" type="hidden" value='${JSON.stringify(flight)}'>
-							<button type="submit" class="travel-button btn-sm btn-lg btn-block background-main-color text-white text-center font-weight-bold text-uppercase ">Voir les détails </button>
+							<button type="submit" style="cursor: pointer" class="travel-button btn btn-primary-travlez text-white text-center font-weight-bold text-uppercase">Voir les détails </button>
 						</form>
 					</div>
 				</div>
@@ -69,9 +72,5 @@ function showFlightList(flights, travelData) {
 		}
 		latestPrice = flight.price.total
 	})
-}
-
-
-function showDetail(index) {
-	console.log(index);
+	document.getElementById("result-container").scrollIntoView()
 }

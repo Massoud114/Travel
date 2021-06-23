@@ -71,10 +71,10 @@
 								<a href="" class="text-grey-4"><i class="fa fa-chevron-down margin-right-5px"></i>
 									Retour :  <span class="text-third-color margin-right-5px">Non estimé</span> </a>
 							</small>
-							<i class="d-block padding-tb-8px text-grey-2 "><span class="margin-right-30px">from: Riyadh</span>to: Paris</i>
+							<i class="d-block padding-tb-8px text-grey-2 "><span class="margin-right-30px">from: {{ travelData.originCountry }}</span>to: {{ travelData.destinationCountry }}</i>
 							<div class="claerfix"></div>
 							<div class="margin-top-8px padding-top-8px text-uppercase text-extra-small border-top-1 border-grey-1">
-								<strong class="text-medium text-third-color padding-right-5px font-weight-bold">{{ flight.price.total }} {{ flight.price.currency }}</strong>Total
+								<strong class="text-medium text-third-color padding-right-5px font-weight-bold">{{ flight.price.total }} {{ flight.price.currency | currency_symbol }}</strong>Total
 								<i class="d-block padding-tb-8px text-grey-2"><span class="margin-right-40px">{{ flight.oneWay ? 'Vol Direct' : 'Escale' }}</span>{{ flight.oneWay ? '' : flight.itineraries|length }}</i>
 							</div>
 							<a href="{{ path('travel.book') }}" class="btn-sm btn-lg btn-block background-main-color text-white text-center font-weight-bold text-uppercase ">Réserver Maintenant </a>

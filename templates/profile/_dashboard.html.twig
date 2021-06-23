@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Dashboard' %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block javascriptsstylesheets %}
+	{{ encore_entry_script_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+	<div class="background-light-grey">
+
+		<div class="container padding-tb-50px">
+			<!-- Navigation-->
+			<nav class="navbar navbar-expand-lg navbar-dark background-main-color " id="mainNav">
+				<a class="navbar-brand" href="{{ path('profile') }}">Dashboard</a>
+				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav navbar-sidenav background-third-color" id="exampleAccordion">
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="My items">
+							<a class="nav-link" href="{{ path('profile.vols') }}">
+								<i class="fa fa-fw fa-table"></i>
+								<span class="nav-link-text">Mes vols</span>
+							</a>
+						</li>
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Profile">
+							<a class="nav-link" href="{{ path('profile.hotels') }}">
+								<i class="fa fa-fw fa-user-circle"></i>
+								<span class="nav-link-text">Mes hôtels</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav sidenav-toggler">
+						<li class="nav-item">
+							<a class="nav-link text-center" id="sidenavToggler">
+								<i class="fa fa-fw fa-angle-left"></i>
+							</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('app_logout') }}" data-toggle="modal" data-target="#exampleModal">
+								<i class="fa fa-sign-out-alt"></i>Déconnexion</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			{% block page %}
+
+			{% endblock %}
+
+		</div>
+	</div>
+{% endblock %}

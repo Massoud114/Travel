@@ -41,7 +41,7 @@
 								$1000 - $10,000
 							</label>
 						</div>
-						<a href="#" class="btn-sm btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600"><i class="fa fa-search"></i> Refresh  Search</a>
+						<a href="#" class="btn-sm btn-lg btn-block background-main-color text-white text-center text-uppercase font-weight-600"><i class="fa fa-search"></i> Refresh Search</a>
 					</div>
 					<!-- Price Search -->
 
@@ -103,7 +103,7 @@
 									<div class="hotel-img position-relative">
 										<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="">
 										<div class="hover-option background-main-color opacity-6">
-											<h3 class="text-center text-white padding-top-n-25 "><i class="fa fa-building-o opacity-10"></i></h3>
+											<h3 class="text-center text-white padding-top-n-25 "><i class="fa fa-building opacity-10"></i></h3>
 										</div>
 									</div>
 								</div>
@@ -116,7 +116,7 @@
 												{% for line in hotel.hotel.address.lines %}{{ line }}{% endfor %}</span>{{ hotel.hotel.address.cityName }}</a>
 										</small>
 										<div class="claerfix"></div>
-										<a href="{{ path('hotel.show', { id : hotel.hotel.hotelId}) }}" class="float-lg-right btn-sm btn-lg background-second-color text-white text-center font-weight-bold text-uppercase margin-top-0px">Réserver Maintenant </a>
+										<a href="{{ path('hotel.show', { id : hotel.hotel.hotelId}) }}" class="float-lg-right btn-sm btn-lg background-second-color text-white text-center font-weight-bold text-uppercase margin-top-0px">Voir les détails </a>
 
 										<i class="d-block padding-tb-8px text-grey-2 ">{{ hotel.available ? 'Disponible' : "Indisponible"}}</i>
 										<div class="margin-bottom-8px text-uppercase text-extra-small">
@@ -126,6 +126,9 @@
 								</div>
 							</div>
 						</div>
+
+					{% else %}
+						<p>Aucun hôtel trouvé pour cette destination</p>
 					{% endfor %}
 				</div>
 				<!-- // Content -->

@@ -43,7 +43,7 @@
 						<div class="alert alert-success margin-tb-15px border-radius-0" role="alert">
 							{{ isAvailable ? "Disponible" : "Indisponible" }}
 						</div>
-						<i class="d-block padding-tb-8px text-grey-2 ">{{ hotel.description.text }}</i>
+						<i class="d-block padding-tb-8px text-grey-2 ">{{ hotel.description.text |u.truncate(150) }}</i>
 						<div class="margin-bottom-8px text-uppercase text-extra-small">
 							<strong class="text-medium text-third-color padding-right-5px font-weight-bold">{{ offer.price.total }} {{ offer.price.currency|currency_symbol }}</strong>
 						</div>
@@ -67,7 +67,8 @@
 							{% endif %}
 							{% if "COFFEE_SHOP" in hotel.amenities%}
 								<li class="col-lg-6 margin-bottom-20px">
-									<i class="fa fa-television text-second-color text-extra-large margin-right-10px"></i> <span>Déjeuner</span>
+									<i class="fa fa-coffee text-second-color text-extra-large margin-right-10px"></i>
+									<span>Déjeuner</span>
 								</li>
 							{% endif %}
 							{% if "DRIVING_RANGE" in hotel.amenities%}
@@ -83,7 +84,6 @@
 					<div class="background-second-color border border-grey-1 padding-30px margin-bottom-30px">
 						<h3 class="text-uppercase text-medium font-weight-700 padding-bottom-8px">BESOIN D'AIDE?</h3>
 						<div class="text-uppercase text-extra-large text-white font-weight-700 padding-bottom-8px">{{ hotel.contact.phone    }}</div>
-						<div class="text-uppercase text-medium">{{ hotel.contact.email }}</div>
 					</div>
 					<!-- // Need help  -->
 

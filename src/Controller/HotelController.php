@@ -31,8 +31,6 @@ class HotelController extends AbstractController
 		$travelData = $session->get('travel');
 		$hotels = $amadeus->getAvailableHotel($travelData);
 
-		dd($hotels);
-
 	    return $this->render('pages/hotel.search.html.twig', [
 	    	'hotels' => $hotels
 	    ]);
@@ -55,7 +53,6 @@ class HotelController extends AbstractController
 
 		$image = $amadeus->getCountryPhoto("hotel-travel");
 
-	    //dd($hotel, $isAvailable, $offer);
 	    return $this->render('pages/hotel.show.html.twig', [
 	    	'hotel' => $hotel,
 		    'isAvailable' => $isAvailable,
@@ -89,7 +86,7 @@ class HotelController extends AbstractController
 		$reservation->setUser($this->getUser())
 			->setIsValid(true)
 			->setIsPurchased(true)
-			->setHotelName($hotel['hotel']['name']);
+			->setHotelName($hotel['name']);
 
 		$manager->persist($reservation);
 		$manager->flush();

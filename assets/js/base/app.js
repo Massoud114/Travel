@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const jQuery = require('jquery');
-
 // Additional imports for templates
 import 'bootstrap'
 import '../../css/bootstrap.min.css'
