@@ -4,11 +4,11 @@ import { connectSearchBox, connectHits } from 'instantsearch.js/es/connectors'
 import '../../css/algolia-autocomplete.css'
 
 const searchClient = algoliasearch(
-	"ARV068TLLX",
-	"8f7a57d6fecf23a79bec3462682adeca"
+	"GKEXJDWHO8",
+	"f4951197020df61392b55c1ffa9ecfcf"
 );
 const search = instantsearch({
-	indexName: "Travel",
+	indexName: "airport-codes",
 	searchClient,
 });
 
@@ -61,7 +61,7 @@ for (let i = 0; i < 2; i++) {
 				li.addEventListener('click', event => {
 					suggestInput.value = `${hit.name}, ${hit.city}, ${hit.country}`;
 					suggestInput.setAttribute("data-country", hit.country)
-					iataValue.value = `${hit.iata_code}`
+					iataValue.value = `${hit.code}`
 					searchWrapper.classList.remove("active");
 				})
 				widgetParams.container.appendChild(li)

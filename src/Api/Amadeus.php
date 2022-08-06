@@ -66,7 +66,7 @@ class Amadeus
 
 	public function getCountryInfo($countryName)
 	{
-		$response = $this->client->request('GET', 'https://restcountries.eu/rest/v2/name/' . $countryName);
+		$response = $this->client->request('GET', 'https://restcountries.com/v3.1/name/' . $countryName);
 		return $response->toArray()[0];
 	}
 
