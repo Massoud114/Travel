@@ -24,7 +24,7 @@
         "@fortawesome/fontawesome-free": "^5.15.3",
         "@popperjs/core": "^2.9.2",
         "algoliasearch": "^4.9.3",
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "bootstrap": "^5.0.1",
         "instantsearch.js": "^4.24.0",
         "jquery": "^3.6.0"
